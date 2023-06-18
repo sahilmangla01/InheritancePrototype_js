@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Assignment</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1  >Inheritance and Prototype Assignment</h1>
+    </header>
+    
+
+    <div class="container">
+        <h2 class="Question">Q1.	Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h2>
+        <pre class="code">Ans.   let parent =  {
+            display : function (){
+                console.log("Hiiiii...............");
+            }
+        }
+        
+        
+        
+        let  child = Object.create(parent)
+        child.name = function(){
+            console.log("I am Child Object")
+        }
+        
+        child.name()
+        child.display()
+        </pre>
+
+        
+
+    </div>
+
+    <div class="container">
+        <h2 class="Question">Q2.	Write code to explain prototype chaining
+            	</h2>
+        <pre class="code">Ans.   function car(wheel,engine){
+            this.wheel=wheel
+            this.engine=engine
+        }
+         car.prototype.start=function(){
+             console.log("This care starts")
+         }
+            
+            function swift(wheel,engine){
+                car.call(this,wheel,engine)
+            }
+            
+        swift.prototype=Object.create(car.prototype)
+        
+        swift.prototype.drive=function(){
+            console.log("This car is driving")
+        }
+        const myswift=new swift(4,"1.4l")
+        myswift.start()
+        myswift.drive()
+        console.log(myswift)
+        </pre>
+        <p class="Explain"><span>Explanation:</span> Prototype chaining is when the children can use the prototypes of its parent. In this Example we have created a constructor object car as parent and swift as child constructor object . Then we have created an object myswift of out swift object. As we can see this new Object have the methods of its parent
+</p>
+    </div>
+
+    <div class="container">
+        <h2 class="Question">Q3.	Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays</h2>
+        <pre class="code">Ans.   Array.prototype.calculateSum = function() {
+            var sum = 0;
+            for (var i = 0; i < this.length; i++) {
+              sum += this[i];
+            }
+            return sum;
+          };
+          
+          // Creating multiple arrays
+          var array1 = [1, 2, 3, 4, 5];
+          var array2 = [10, 20, 30];
+          var array3 = [2, 4, 6, 8, 10, 12];
+          
+          // Calculating the sum using the method from the Array prototype
+          var sum1 = array1.calculateSum();
+          var sum2 = array2.calculateSum();
+          var sum3 = array3.calculateSum();
+          
+          console.log(sum1); 
+          console.log(sum2); 
+          console.log(sum3); 
+        
+        </pre>
+    </div>
+
+    <div class="container">
+        <h2 class="Question">Q4.	Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h2>
+            <pre class="code">Ans.   function getAllPropertyNames(obj) {
+                var propertyNames = [];
+              
+                // Retrieve own property names
+                for (var prop in obj) {
+                  if (obj.hasOwnProperty(prop)) {
+                    propertyNames.push(prop);
+                  }
+                }
+              
+                // Retrieve inherited property names
+                var prototype = Object.getPrototypeOf(obj);
+                if (prototype !== null) {
+                  var inheritedPropertyNames = getAllPropertyNames(prototype);
+                  propertyNames = propertyNames.concat(inheritedPropertyNames);
+                }
+              
+                return propertyNames;
+              }
+              
+              // Example usage
+              var obj = {
+                name: "John",
+                age: 30
+              };
+              
+              function Person() {
+                this.gender = "Male";
+              }
+              Person.prototype = obj;
+              
+              var person = new Person();
+              person.city = "New York";
+              
+              var propertyNames = getAllPropertyNames(person);
+              console.log(propertyNames);
+            
+            </pre>
+                
+    </div>
+
+
+    
+
+   
+    
+   
+
+
+</body>
+</html>
